@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class Datastore:
     """
     Datastore for the f1 driver database
@@ -13,10 +14,10 @@ class Datastore:
         self.conn = sqlite3.connect("f1_driver.db")
         self.cursor = self.conn.cursor()
 
-        self.bulid_database()
+        self.build_database()
         self.conn.commit()
 
-    def bulid_database(self):
+    def build_database(self):
         """
         builds the database
         """
@@ -61,3 +62,5 @@ class Datastore:
             );
             """
         )
+        
+db = Datastore()
