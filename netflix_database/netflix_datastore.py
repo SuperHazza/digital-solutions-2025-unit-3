@@ -27,4 +27,10 @@ class Datastore:
 
             # process the CSV data
             for record in csv_reader:
-                print(record)
+                # process types values
+                name = record["type"]
+
+                # view the type data
+                print(
+                    name,
+                )
