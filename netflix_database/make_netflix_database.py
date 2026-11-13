@@ -36,7 +36,7 @@ class Datastore:
             """
             CREATE TABLE "Rating" (
                 "Rating_ID"	INTEGER,
-                "Name"	TEXT NOT NULL,
+                "Name"	TEXT NOT NULL UNIQUE,
                 PRIMARY KEY("Rating_ID" AUTOINCREMENT)
             );
             """

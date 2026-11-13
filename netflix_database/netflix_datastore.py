@@ -1,5 +1,6 @@
-import sqlite3
+import ast
 import csv
+import sqlite3
 
 
 class Datastore:
@@ -29,11 +30,19 @@ class Datastore:
             # process the CSV data
             for record in csv_reader:
                 # process types values
-                name = record["type"]
+                type_name = record["type"]
 
                 # view the type data
-                self.add_type(
-                    name,
+                type_id = self.add_type(
+                    type_name,
+                )
+
+                # processes the rating data
+                if record["rating"]:
+                    rating_name = record["rating"]
+
+                rating_id = self.add_rating(
+                    rating_name,
                 )
 
     def add_type(
@@ -52,3 +61,24 @@ class Datastore:
                 "name": name,
             },
         )
+
+        return self.cursor.lastrowid
+
+    def add_rating(
+            self,
+            name: str,
+        ):
+            """
+            adds a rating to the database
+            """
+            self.cursor.execute(
+                """
+                INSERT OR IGNORE INTO Rating (name)
+                VALUES (:name)
+                """,
+                {
+                    "name": name,
+                },
+            )
+    
+            return self.cursor.lastrowid
