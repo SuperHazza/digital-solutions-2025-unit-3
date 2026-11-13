@@ -17,6 +17,7 @@ class Datastore:
         self.cursor = self.conn.cursor()
 
         self.populate_database()
+        self.conn.commit()
 
     def populate_database(self):
         """
@@ -31,6 +32,23 @@ class Datastore:
                 name = record["type"]
 
                 # view the type data
-                print(
+                self.add_type(
                     name,
                 )
+
+    def add_type(
+        self,
+        name: str,
+    ):
+        """
+        adds a type to the database
+        """
+        self.cursor.execute(
+            """
+            INSERT OR IGNORE INTO Types (name)
+            VALUES (:name)
+            """,
+            {
+                "name": name,
+            },
+        )

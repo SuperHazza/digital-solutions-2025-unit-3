@@ -26,7 +26,7 @@ class Datastore:
             """
             CREATE TABLE "Types" (
 	            "Type_ID"	INTEGER,
-	            "Name"	TEXT NOT NULL,
+	            "Name"	TEXT NOT NULL UNIQUE,
 	            PRIMARY KEY("Type_ID" AUTOINCREMENT)
             );
             """
